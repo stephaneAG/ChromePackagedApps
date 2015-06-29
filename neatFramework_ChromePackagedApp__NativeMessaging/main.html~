@@ -1,0 +1,26 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+  
+  <meta charset="UTF-8">
+  <title>ntFrmwrk Chrome App/Ext</title>
+  <link rel="stylesheet" type="text/css" href="./css/main.css">
+  
+
+</head>
+<body>
+  
+  <!-- [ main container ] -->
+  <div id="container">
+
+  </div> <!-- <div id="main-container"> -->
+    
+  { Native Messaging & EEG wip }
+
+  
+
+  <!-- load the Extension/App modules -->
+  <!-- <script src="./js/neatFramework_JSON_MODULE.js"></script> --> <!-- load the neatFramework JSON module --> 
+
+</body>
+</html>

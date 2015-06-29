@@ -1,0 +1,75 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+  
+  <meta charset="UTF-8">
+  <title>ntFrmwrk Chrome App/Ext</title>
+  <!-- <link rel="stylesheet" type="text/css" href="./css/main.css"> --> <!-- ORIGINAL PLACE OF THE MAIN CSS CODE-->
+  
+  <link rel="stylesheet" href="./css/default.css"> <!-- Zip-demo related -->
+  <link rel="stylesheet" href="./css/demo.css"> <!-- Zip-demo related -->
+
+</head>
+<body>
+  
+  <!-- [ main container ] -->
+  <div id="container">
+  
+  <!-- TODO: add stuff to be contained -->
+  
+    <!-- the following is an "adjusted copy/paste" on the demo's code ( .. ) -->
+    <ol id="demo-container">
+      <!-- the following has been commented-out ( aka, desactivated/not available for selection ) as the HDD option for temporary storage throws an error in the javascript console ( .. ) -->
+      
+      <li style="display: none;">
+        <label>
+          <span class="form-label">choose temporary storage</span>
+	  <select id="creation-method-input">
+	    <option value="Blob">RAM</option>
+	    <option value="File">HDD</option>
+	  </select>
+	</label>
+      </li>
+      
+      <li>
+	<label>
+	  <span class="form-label">add files into the zip</span>
+	  <input type="file" multiple="" id="file-input">
+	</label>
+      </li>
+	
+      <li>
+	<span class="form-label">view zip content</span>
+	<ul id="file-list" style="height: 80px; overflow-y: scroll;"></ul>
+      </li>
+	
+      <li>
+	<label>
+	  <span class="form-label">set zip file name</span>
+	  <input type="text" id="filename-input" value="Example.zip">
+	</label>
+      </li>
+	
+      <li>
+	<span class="form-label">download the zip file</span>
+	<a id="download-button" href="filesystem:http://gildas-lormeau.github.io/temporary/tmp.zip" download="AndroidIconsGenerator_testZip.zip">Download</a>
+      </li>
+    </ol>
+
+  </div> <!-- <div id="main-container"> -->
+    
+  
+
+  
+
+  <!-- load the Extension/App modules -->
+  
+  <script type="text/javascript" src="./js/zip.js"></script> <!-- Zip module --> 
+  <script type="text/javascript" src="./js/demo1.js"></script> <!-- Zip module demo code -->
+
+  <!-- <script src="./js/neatFramework_chrome_devtools_MODULE.js"></script> --> <!-- load the neatFramework chrome devtools module -->
+  <!-- <script src="./js/app_logic.js"></script> --> <!-- load the app logic ( not a "main.js" as the app is not big enough to need a dedicated module ) -->
+  
+
+</body>
+</html>

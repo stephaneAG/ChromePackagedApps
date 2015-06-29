@@ -1,0 +1,28 @@
+{
+  "entity": "Stéphane GARNIER",
+  "siret": "509 167 243 R.C.S NANTERRE",
+  "address": "20 rue de l’Armorique",
+  "city": "75015 Paris",
+  "invoiceInternalReference": "F0000001",
+  "invoiceExternalReference": "EXF00001",
+  "cgiTva": ["( TVA non applicable, article 293 B du CGI )", "( non-applicable VAT, CGI article 293 B )"],
+  "location": "Paris",
+  "dates": ["21/07/2014", "2014/07/21"],
+  "signatureInternalEntity": "Stéphane GARNIER",
+  "signatureExternalEntity": "Florian Ponroy, Dekibae",
+  "brandInternalLabel": "Seeds Design",
+  "brandExternalLabel": "unset",
+  "tel1": "06 81 38 27 22",
+  "tel2": "09 51 51 02 14",
+
+  "langs": ["fr"],
+  "designationTexts": ["fr_designationTexts.json", "en_designationTexts.json"],
+  "designations": ["fr_designations.json", "en_designations.json"],
+  "pricingTexts": ["fr_pricingTexts.json", "en_pricingTexts.json"],
+  "pricing": ["2000 €", "2500 $"],
+  "payementTexts": ["fr_payementTexts.json", "en_payementTexts.json"],
+  "payement": ["fr_payement.json", "en_payement.json"],
+  "signatureInternalEntityTexts": ["signature prestataire de service", "service provider signature"],
+  "signatureExternalEntityTexts": ["signature client", "client signature"],
+  "brandLabelTexts": ["sous la marque", "under the brand"]
+}

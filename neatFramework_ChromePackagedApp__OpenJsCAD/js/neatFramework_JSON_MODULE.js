@@ -1,0 +1,170 @@
+/* 
+*  neatFramework: JSON Module
+*
+*  neatFramework_JSON_MODULE.js - A javascript module file holding a scoped/closured/contained implementation of some useful helpers for working with local JSON files
+*  
+*  by StephaneAG - 2014
+ */
+
+// Self_executing_Anonymous Fcn ( providing closure & preventing polluting the global namespace (..) )
+// R: 'barebone syntax' : (function(){})(); 
+(function(theWindow, theDocument, theUndefined){
+  var _undef; // an undefined var
+  var _undefined = ''; // another "undefined" var
+  // some 'closures' tests ..
+  //console.log('[ neatFramework_serial_console_MODULE.js ] theWindow == window ? : ' + ( theWindow == window ) ); // true
+  //console.log('[ neatFramework_serial_console_MODULE.js ] theDocument == document ? : ' + ( theDocument == document ) ); // true
+  //console.log('[ neatFramework_serial_console_MODULE.js ] theUndefined == "undefined" ? : ' + ( theUndefined == undef ) ); // true
+  
+  /* ************************************************************************************************************************************************ */
+  // our actual 'Module' code .
+  
+  /*  ---- module API ----
+  *
+  *   The "app_logic.js" file ( or the "main.js" file if the app logic is handled in its own module ) has the following functions available:
+  *
+  *   - consoleLog()              --> is used to log some stuff on the javascript console with a custom CSS applied
+  *
+  *   - loadJSON()           --> is used to load a JSON file - returns a JSON Object
+  *
+  */
+
+  // first, we define the closure/scope of our module
+  /* ---------- MODULE CLOSURE ---------- */
+  var JSON_module = {}; // empty obj
+  /* ------------------------------------ */
+
+  /* -- module API functions -- */
+
+  /* loadJSON() - load a local JSON file - returns a JSON Object */
+  /*
+    Example of use:
+    
+    neatFramework.JSON.loadJSON("testdata.json", function(response){
+      // do something with the response
+      jsonResponse = JSON.parse(response);
+      console.log(jsonResponse.entity); // ex
+    });
+
+
+    In our case:
+ 
+    neatFramework.JSON.loadJSON("json/testdata.json", function(response){
+      jsonResponse = JSON.parse(response); // parse the json fetched from the path passed as argument
+      // debug logs
+      console.log(jsonResponse.entity);
+      console.log(jsonResponse.siret);
+      console.log(jsonResponse.address);
+      console.log(jsonResponse.city);
+      console.log(jsonResponse.invoiceInternalReference);
+      console.log(jsonResponse.invoiceExternalReference);
+      console.log(jsonResponse.cgiTva[0]);
+      console.log(jsonResponse.location);
+      console.log(jsonResponse.dates[0]);
+      console.log(jsonResponse.signatureInternalEntity);
+      console.log(jsonResponse.signatureExternalEntity);
+      console.log(jsonResponse.brandInternalLabel);
+      console.log(jsonResponse.brandExternalLabel);
+      console.log(jsonResponse.tel1);
+      console.log(jsonResponse.tel2);
+      console.log(jsonResponse.langs[0]);
+      console.log(jsonResponse.designationTexts[0]);
+      console.log(jsonResponse.designations[0]);
+      console.log(jsonResponse.pricingTexts[0]);
+      console.log(jsonResponse.pricing[0]);
+      console.log(jsonResponse.payementTexts[0]);
+      console.log(jsonResponse.payement[0]);
+      console.log(jsonResponse.signatureInternalEntityTexts[0]);
+      console.log(jsonResponse.signatureExternalEntityTexts[0]);
+      console.log(jsonResponse.brandLabelTexts[0]);
+    });
+
+    Nbs: we can also:
+             - use a "local file path", such as "file:///home/stephaneag/Documents/Development/dev__Chrome_Packaged_Apps/neatFramework_ChromePackagedApp__OpenJsCAD/json/testdata.json"
+           or 
+             - even fetch a remote json passing its path, such as "http://188.226.162.97/neatFramework_JSON_Module/testdata.json"
+             Nb: in case of a Chrome Packaged App, we'll also need the following to be present inthe manifest.json:
+               "permissions": [ "http://localhost:*", "file:///*", "http://188.226.162.97:*" ],
+               Nb: the above was simplified ( no <addr>:<* for port>/<* for url> ) no to be interpreted as code ( while serving only as a comment here .. )
+
+  */
+  var loadJSON = function(jsonFilePath, callbackFcn){
+    var xhr = new XMLHttpRequest();
+    xhr.overrideMimeType("application/json");
+    xhr.open('GET', jsonFilePath, true);
+    xhr.onreadystatechange = function(){
+      if(xhr.readyState == 4 && xhr.status == "200"){
+        // .open won't return a value but simply "undefined" in async mode, so we use a callback
+        callbackFcn(xhr.responseText);
+      }
+    }
+    xhr.send(null);
+  };
+
+  /* -------------------------- */
+
+  // fcn that ...
+  var _helloWorld = function(){ console.log("Hello world !"); };
+  var helloWorld2 = function(){ console.log("Hello world2 !"); };
+  var log_module_version = function(){ console.log(module_version) };
+    
+  /* ------------------------------------- */  
+
+  /* ---- ChromeAPI-based functions ---- */
+  
+  var consoleLog = function(messageStr,cssStr){
+    console.log("%c"+messageStr, cssStr);
+  };
+
+  /* ----------------------------------- */
+
+  /* --- ChromeAPI callback functions -- */
+  /* ----------------------------------- */
+
+  /* ********************************************************************* */
+
+  // a Fcn that handles the 'initial setup', at Module init (..)
+  function _initial_setup_module_init(){
+    //initial setup config of our module
+  }
+
+  /* ************************************************************************************************************************************************ */
+    
+  // the module test variable
+  var module_version = '[ neatFramework_JSON_MODULE.js v0.1a ]';
+		
+  // framework scope
+  var neatFramework = theWindow.neatFramework || {}; // if 'neatFramework' is not defined, we make it equal to an empty object
+  theWindow.neatFramework = neatFramework; // and then use it as the window.neatFramework object (..)
+		
+  // the Module's init Fcn
+  function _initModule(){
+    //console.log('[ neatFramework_JSON_module.js ] : ' + 'initiating module ..'); // debug message > module is registered
+    consoleLog('[ neatFramework_JSON_MODULE.js ] : ' + 'initiating module ..', 'color: #1DCFD8;');
+    _initial_setup_module_init(); // actually init the module's 'initial setup' config/params (..)
+  }
+		
+  // make available some fcns outside of the 'Self Executing Anonymous Function' of the module closure ..
+  JSON_module.module_version = module_version; // attach it not directly to 'theWindow' ( > wich is defined 'upon' window (..) ), but instead to the module closure
+  JSON_module.log_module_version = log_module_version; // for sure 'll be practical ( see new _checkModule() in app_logic.js )
+  // "attach" our function not directly to the "neatFramework" object this time, but to the "closure"(/empty object) of the current module, called "callbackFunctions_module"
+  JSON_module.helloWorld = _helloWorld; // note: the names of the function inside the file and the one "attached" ( callable from outside the current scope ) can be different ( .. )
+  JSON_module.helloWorld2 = helloWorld2; // another test
+
+  /* -- tiny API -- */
+  
+  // API functions
+  JSON_module.consoleLog = consoleLog;
+  JSON_module.loadJSON = loadJSON;
+
+  /* -------------- */
+
+  neatFramework.JSON = JSON_module; // note: nearly the same as above, but "one parent level up", to add our module to the "neatFramework" object ;)  
+
+
+  /* ************************************************************************************************************************************************ */
+  // actually init the module ..
+  _initModule();
+  /* ************************************************************************************************************************************************ */
+		
+})(window, document);

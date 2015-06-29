@@ -1,0 +1,212 @@
+<!doctype html>
+
+<!-- 
+file:///home/stephaneag/Documents/Development/dev__Chrome_Packaged_Apps/chromePackagedApp_Angular_codeschool/main.html
+http://campus.codeschool.com/courses/shaping-up-with-angular-js/level/3/section/2/video/1
+-->
+
+<!--
+
+AngularJS R:
+ * Directive     -> HTML annotations that trigger Javascript behaviors
+ * Modules       -> Where the application components live
+     It's best to split Modules around fcnality:
+       .app.js      -> top-level module attached via "ng-app"
+       .products.js -> all the fcnality for products & ONLY products
+ 
+ * Controllers   -> Where we add the application behavior
+ * Expressions   -> How values get displayed within the page
+
+ * Filters       -> syntax: " {{ data* | filter:options* }} "
+                    ex(s): - the 'date' filter                   => " {{ '1388123412323' | date:'MM/dd/yyyy @ h:mma' }} "  ==> " 12/27/2013@12:50AM "
+                           - the 'uppercase & lowercase' filters => " {{ 'octagon gem' | uppercase }} "                    ==> " OCTAGON GEM "
+                           - the 'limitTo' filter                => " {{ 'My Description' | limitTo:8 }} "                  ==> " My Descr "
+                                                                 => " <li ng-repeat=" product in store.products | limitTo:3 "> "
+                           - the 'orderBy' filter                => " <li ng-repeat=" product in store.products | orderBy:'-price' "> "
+                             R: '-price' for descending price, 'price' for ascending order
+
+ * examples of 2-way Data Binding using 'ng-model':
+   - with a checkbox => sets value to true or false
+     " <input ng-model="review.terms" type="checkbox" /> I agree to the terms "
+   - with radio buttons => sets the proper value based on wich is selected
+     " What color would you like ?
+       <input ng-model="reviewcolor" type="radio" value="red" /> Red
+       <input ng-model="reviewcolor" type="radio" value="blue" /> Blue
+       <input ng-model="reviewcolor" type="radio" value="green" /> Green
+     "
+
+ * examples of angular's built-in validations for common input types
+  " <input type="email" name="email"> "
+  " <input type="url" name="homepage"> "
+  " <input type="number" name="quantity"> " or " <input type="number" name="quantity" min=1 max=10> "
+
+-->
+
+<html ng-app="store"> <!-- ng-app directive to execute the corresponding module when the document loads -->
+  <head>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/main.css" />
+    <script src="js/angular.min.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/products.js"></script> <!-- we also add our "store-products" module -->
+  </head>
+  <body ng-controller="StoreController as store">
+    <div>
+      <label> Votre Nom:</label>
+      <input type="text" ng-model="leNom" placeholder="Entrez votre nom ici">
+      <hr>
+      <h1>Hello {{leNom}} !</h1>
+    </div>
+    
+    <!-- codeSchool tut -->
+    <!-- ng-controller directive to attach our controller to this html element -->
+    <!-- we use the name of the controller as the value & specify an alias that we'll use in our expression -->
+    <ul>
+      <li ng-repeat="product in store.products" ng-hide="store.product.soldOut">
+        <!--
+        <h1> {{store.product.name}} </h1>
+        <h2> ${{store.product.price}} </h2>
+        <p>  {{store.product.description}} </p>
+        -->
+      
+        <!-- 
+        <h1> {{store.product[0].name}} </h1>
+        <h2> ${{store.product[0].price}} </h2>
+        <p>  {{store.product[0].description}} </p>
+        -->
+        
+        <!-- we use the 'pipe' to send the output to the 'currency' filter, wich gives us a localized currency sign & correct number of decimals  -->
+        <h3> 
+          {{product.name}} | {{product.description}}
+          <em class="pull-right">{{ product.price | currency }}</em>
+          <img ng-src="img/{{ product.images[0].full }}" />
+        </h3>
+           <!-- display our image using an expression for its source url => " <img ng-src="img/{{ product.images[0].full }}" /> " -->
+        <!-- the above now resides in an html snippet loaded using angular's include fcnality -->
+        <!-- WARNING: the following DOES NOT WORK LOCALLY when using "file:///..." in a browser as it relies on ajax stuff ( .. ) -->
+        <!-- <h3 ng-include="'product-title.html'"></h3> --> <!-- use angular's 'include' to use templates & thus provide it the name of the file :D -->
+        
+        <!-- ANY WAY: now learning angular's "custom directives", allowing to have even a more nicer html layout -->
+        <!--
+            * Directives: - part of the 'secret sauce' of angular JS
+                          - allows to write HTML that express the behavior of an app ( -> not only the structure of it )
+                          - 'expressiveness' is at the center of thair main power ;p
+                          - many types: -> Template-expanding directives ( the simplest ):
+                                             .define a custom tag/attribute that is expanded or replaced ( like an 'ng-include' would )
+                                             .can include Controller logic, if needed
+                                        -> & can also be used for:
+                                             .expressing complex UI
+                                             .calling events & registering event handlers
+                                             .reusing common components
+            -> Here, we'll see the first type ;)
+            
+            We use Elements directives for UI widgets & Attribute Directives for mixin behaviors .. like a tooltip
+            Nb: we can create custom directives for Elements as well as for Attributes:
+                - for an element ( ex: " <product-title></product-title> " ) => " restrict: 'E' "
+                - for an attribute ( ex: " <h3 product-title></h3> " ) => " restrict: 'A' "
+                
+            Nb2: we can also put Controllers in directives
+        -->
+        <!-- <product-title></product-title> --> <!-- the directive is defined in the app.js .. and does NOT work locally with 'file:///..' -->
+        <!-- <img ng-src="img/{{ product.images[0].full }}" /> -->
+        <!-- ng-init allows to evaluate an expression in the current scope, aka here, set a specific tab panel open on page load -->
+        <!-- <section ng-init="tab = 1" > --> <!-- was used before moving the initialization in the 'PanelController' -->
+        <section ng-controller="PanelController as panels" > 
+         <!-- our product's info tabs -->
+          <ul class="nav nav-pills">
+            <!-- we use the ng-click directive to make an expression execute when clicking on the tabs -->
+            <!-- we use the ng-class directive to set the 'active' class of our tabs -->
+            <!--    we pas it an object, with the name of the class to set as parameter & the expression to evaluate as value  -->
+            <!-- <li ng-class="{ active:tab === 1 }"> --> <!-- was used before the comparision code was moved to the app.js file -->
+            <li ng-class="{ active:panels.isSelected(1) }">
+              <!-- <a href ng-click="tab = 1" >Description</a> --> <!-- was used before moving the assignement logic in the PanelController -->
+              <a href ng-click="panels.selectTab(1)" >Description</a>
+            </li> <!-- actually , 'ng-click' assign a value to each tab -->
+            <!-- <li ng-class="{ active:tab === 2 }"> -->
+            <li ng-class="{ active:panels.isSelected(2) }">
+              <!-- <a href ng-click="tab = 2" >Specifications</a> -->
+              <a href ng-click="panels.selectTab(2)" >Specifications</a>
+            </li>
+            <!-- <li ng-class="{ active:tab === 3 }"> -->
+            <li ng-class="{ active:panels.isSelected(3) }">
+              <!-- <a href ng-click="tab = 3" >Reviews</a> -->
+              <a href ng-click="panels.selectTab(3)" >Reviews</a>
+            </li>
+          </ul>
+          <!-- {{ tab }} --> <!-- debug print of the value assigned to each of the tabs -->
+          <!-- 
+              R: when ng-click changes the value of tab, the {{tab}} expression gets updates => Expressions defines a 2-way Data Binding
+                 aka, expressions are re-evaluated when a property changes
+          -->
+          <!-- our product's info tabs content panels -->
+          <!-- <div class="panel" ng-show="tab === 1" > --> <!-- 'old way' --> <!-- we use ng-show to show the pane if the tab is the right number -->
+          <div class="panel" ng-show="panels.isSelected(1)" >
+            <h4> Description </h4>
+            <p> {{ product.description }} </p>
+          </div>
+          <!-- <div class="panel" ng-show="tab === 2" > -->
+          <div class="panel" ng-show="panels.isSelected(2)" >
+            <h4> Specifications </h4>
+            <p> Not yet </p>
+          </div>
+          <!-- <div class="panel" ng-show="tab === 3" > -->
+          <div class="panel" ng-show="panels.isSelected(3)" >
+            <h4> Reviews </h4>
+            <!-- <p> Not yet </p> --> <!-- was used before as placeholder -->
+            <!-- all the reviews of the product posted by previous clients -->
+            <blockquote ng-repeat="review in product.reviews" >
+              <b>Stars: {{review.stars}}</b>
+              {{review.body}}
+              <cite>-{{review.author}} on {{review.createdOn | date}}</cite>
+            </blockquote>
+            <!-- a form to allow a client to enter a new review -->
+            <!-- <form name="reviewForm"> --> <!-- was used before using a custom controller -->
+             <!-- <form name="reviewForm" ng-controller="ReviewController as reviewCtrl" ng-submit="reviewCtrl.addReview(product)"> --> <!-- now using a custom controller -->
+             <!-- <form name="reviewForm" ng-controller="ReviewController as reviewCtrl" ng-submit="reviewCtrl.addReview(product)" novalidate> -->
+              <!-- now using custom form validation-->
+             <form name="reviewForm" ng-controller="ReviewController as reviewCtrl" ng-submit="reviewForm.$valid && reviewCtrl.addReview(product)" novalidate>
+              <!-- no ensuring form is valid before updating our review -> aka, if 'reviewForm.$valid' is false, then 'addReview(product)' won't be called -->
+             <!-- live preview of the review being written by the client for him to see -->
+             <blockquote>
+              <!--
+              <b>Stars: {{review.stars}}</b>
+              {{review.body}}
+              <cite>by: {{review.author}}</cite>
+              -->
+              <b>Stars: {{reviewCtrl.review.stars}}</b>
+              {{reviewCtrl.review.body}}
+              <cite>-{{reviewCtrl.review.author}}</cite> <!-- on {{reviewCtrl.review.createdOn}} -->
+            </blockquote>
+             
+              <!-- <select ng-model="review.stars"> --> <!-- we use ng-model to bind the form elements value to the property -->
+              <!-- <select ng-model="reviewCtrl.review.stars"> --> <!--  now using a custom controller -->
+              <select ng-model="reviewCtrl.review.stars" required> <!-- now using custom form validation -->
+                <option value="1" >1 star</option>
+                <option value="2" >2 stars</option>
+              </select>
+              <!-- <textarea ng-model="review.body"></textarea> --> <!--  now using a custom controller -->
+              <!-- <textarea ng-model="reviewCtrl.review.body"></textarea> -->
+              <textarea ng-model="reviewCtrl.review.body" required></textarea> <!-- now using custom form validation -->
+              <label>by:</label>
+              <!-- <input ng-model="review.author" type="email" /> -->
+              <input ng-model="reviewCtrl.review.author" type="email" placeholder="user@domain.loc" required/> <!-- now using custom form validation -->
+              <div> reviewForm is {{ reviewForm.$valid }} </div> <!-- DEBUG: display form validity ( 'reviewForm' is the actual name of the form -> see above ) -->
+              <input type="submit" value="Submit" />
+            </form>
+          </div>
+        </section>
+        <!-- the above is used when NOT using directives -->
+        <!-- the stuff below is the name as the above, when using directives -->
+        <!-- <product-panels ngcontroller="PanelController as panel"> ... </product-panels> -->
+        
+      
+        <!-- we use a directive to only show the button when 'canPurchase' is true -->
+        <!-- <button ng-show="store.product.canPurchase"> Add to cart </button> --> <!-- the absence of the property check is evaluated as 'falsy' -->
+        <!-- <button ng-show="store.product[0].canPurchase"> Add to cart </button> -->
+        <button ng-show="product.canPurchase"> Add to cart </button>
+      </li>
+    </ul>
+
+    <script src="js/background.js"></script> <!-- ChromePackagedApp module -->
+  </body>
+</html>

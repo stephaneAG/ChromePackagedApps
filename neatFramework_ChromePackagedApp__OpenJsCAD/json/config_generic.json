@@ -1,0 +1,89 @@
+{
+  "3dPrinterSettings": {
+    "printBedDimensions": {
+      "width": "220",
+      "depth": "220",
+      "unit": "cm"
+    }
+  },
+    
+  "step1": {
+    "scale": {
+      "offsetX": "220",
+      "offsetY": "220",
+      "offsetZ": "220"
+    },
+    "rotate": {
+      "offsetX": "220",
+      "offsetY": "220",
+      "offsetZ": "220"
+    },
+    "translate": {
+      "offsetX": "220",
+      "offsetY": "220",
+      "offsetZ": "220"
+    },
+    "colorize": {
+      "color": "#27E7CE"
+    }
+  },
+    
+  "step2": {
+    "profileCutDepth": "220"
+  },
+    
+  "step3": {
+    "rotate": {
+      "offsetX": "220",
+      "offsetY": "220",
+      "offsetZ": "220"
+    },
+    "center": {
+      "offset": "220",
+      "offsetDepth": "220"
+    }
+  },
+    
+  "step4": {
+    "cutouts": {
+      "topLeftRect": {
+        "width": "220",
+        "height": "220",
+        "depth": "220",
+        "rotationOffset": "20",
+        "offsetX": "220",
+        "offsetY": "220"
+      },
+      "bottomLeftRect": {
+        "width": "220",
+        "height": "220",
+        "depth": "220",
+        "rotationOffset": "-20",
+        "offsetX": "220",
+        "offsetY": "220"
+      }
+    }
+  },
+    
+  "step5": {
+    // moldTop logic:
+    //
+    // " moldTop = ( mesh + upscaledMeshClone + plate ).difference( mesh + ( offset( cutout( mesh - meshUpAndBottom ) ) ) ) "
+    // " moldTop =  moldTop.difference( ( mesh + plate ) + siliconInAndOutTubes ) "
+  },
+    
+  "step6": {
+    // moldBottom logic:
+    //
+    // " moldBottom =  mesh + plate "
+  },
+    
+  "step7": {
+    "moldBottomOffsetY": "220" // offset the position of the mold bottom on the Y axis to have it straight across the print bed ( 0 on Y axis position )
+    // depending on the 3d printer bed dimensions set in the settings, deduce if it's possible to have the two mold parts side by side
+    // if it is, translate to specified offsetX || offset Y ( & do ( automatically ) the necessary rotation on Z axis )
+    "moldBottomTranslateOffsetX": "510" // default is "mesh.width + 10"
+    "moldBottomTranslateOffsetZ": "0" // default
+    // else, generate two different .stl files, on containing each part of the mold
+  }
+}

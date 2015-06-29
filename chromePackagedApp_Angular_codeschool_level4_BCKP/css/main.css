@@ -1,0 +1,4 @@
+/* Product -> Review -> form validation: inform the users when something is wrong with the data they're entering */
+.ng-invalid.ng-pristine { border-color: #78BEFA; } /* red border for never touched */
+.ng-invalid.ng-dirty { border-color: #FA787E; } /* red border for invalid */
+.ng-valid.ng-dirty { border-color: #78FA89; } /* red border for invalid */

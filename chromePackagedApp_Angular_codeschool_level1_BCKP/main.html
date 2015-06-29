@@ -1,0 +1,59 @@
+<!doctype html>
+
+<!--
+
+AngularJS R:
+ * Directive     -> HTML annotations that trigger Javascript behaviors
+ * Modules       -> Where the application components live
+ * Controllers   -> Where we add the application behavior
+ * Expressions   -> How values get displayed within the page
+
+-->
+
+<html ng-app="store"> <!-- ng-app directive to execute the corresponding module when the document loads -->
+  <head>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+    <script src="js/angular.min.js"></script>
+    <script src="js/app.js"></script>
+  </head>
+  <body ng-controller="StoreController as store">
+    <div>
+      <label> Votre Nom:</label>
+      <input type="text" ng-model="leNom" placeholder="Entrez votre nom ici">
+      <hr>
+      <h1>Hello {{leNom}} !</h1>
+      <p> My number is {{ 3 + 5 }} </p> <!-- example of an angular expression: allws to insert dynamic values into html -->
+      <p> My number is {{ 'Hello' + ' there ! :D' }} </p> <!-- DIGG: http://docs.angularjs.org/guide/expression -->
+    </div>
+    
+    <!-- codeSchool tut -->
+    <!-- ng-controller directive to attach our controller to this html element -->
+    <!-- we use the name of the controller as the value & specify an alias that we'll use in our expression -->
+    <!-- -->
+    <!-- <div ng-show="!store.product.soldOut"> --> <!-- awkward way -> we only wanna show the div if the product is NOT sold out -->
+    <!-- <div ng-hide="!store.product.soldOut"> --> <!-- same as aboe but less awkwardly done -->
+     <div ng-repeat="product in store.products" ng-hide="store.product.soldOut">
+      <!--
+      <h1> {{store.product.name}} </h1>
+      <h2> ${{store.product.price}} </h2>
+      <p>  {{store.product.description}} </p>
+      -->
+      
+      <!-- 
+      <h1> {{store.product[0].name}} </h1>
+      <h2> ${{store.product[0].price}} </h2>
+      <p>  {{store.product[0].description}} </p>
+      -->
+      <h1> {{product.name}} </h1>
+      <h2> ${{product.price}} </h2>
+      <p>  {{product.description}} </p>
+      
+      <!-- we use a directive to only show the button when 'canPurchase' is true -->
+      <!-- <button ng-show="store.product.canPurchase"> Add to cart </button> --> <!-- the absence of the property check is evaluated as 'falsy' -->
+      <!-- <button ng-show="store.product[0].canPurchase"> Add to cart </button> -->
+      <button ng-show="product.canPurchase"> Add to cart </button>
+    </div>
+
+    <script src="js/background.js"></script> <!-- ChromePackagedApp module -->
+  </body>
+</html>

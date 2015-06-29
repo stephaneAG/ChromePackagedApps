@@ -1,0 +1,181 @@
+
+#container {
+  background: #faf9f3;
+  //height: 777px; /* landscape A4 format */
+  //width: 1017px; /* portrait A4 format */
+  height: 737px; /* landscape A4 format */
+  width: 1037px; /* portrait A4 format */
+}
+
+.bottominfos .entity {
+  text-align: center;
+  font-size: 13px;
+}
+
+.entity {
+  text-align: center;
+  font-size: 20px;
+}
+
+.bottominfos .siret {
+  text-align: center;
+  font-size: 13px;
+}
+
+.siret {
+  text-align: center;
+}
+
+.bottominfos .address {
+  text-align: center;
+  font-size: 13px;
+}
+
+.address {
+  text-align: center;
+}
+
+.bottominfos .city {
+  text-align: center;
+  font-size: 13px;
+}
+
+.city {
+  text-align: center;
+}
+
+.references {
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  font-size: 20px;
+}
+
+.logo {
+  text-align: center;
+}
+
+.presta {
+  margin-top: 30px;
+  margin-bottom: 30px;
+  //background: blue;
+}
+
+.designationText {
+  display: inline-block;
+  width: auto;
+  padding-left: 50px;
+}
+
+.designations {
+  display: inline-block;
+  float: right;
+  //margin-left: 60px;
+  padding-right: 50px;
+}
+
+.pricingText {
+  display: inline-block;
+  padding-left: 50px;
+}
+
+.pricing {
+  display: inline-block;
+  float: right;
+  padding-right: 50px;
+}
+
+.payementText {
+  display: inline-block;
+  padding-left: 50px;
+}
+
+.payement {
+  display: inline-block;
+  float: right;
+  padding-right: 50px;
+}
+
+.cgiTva {
+  text-align: center;
+}
+
+.locationdatespacer {
+  width: 50%;
+  //background: red;
+  text-align: center;
+  clear: both;
+  margin-bottom: 10px;
+}
+
+.signatures {
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.signatureInternalEntityText {
+  display: inline-block;
+  width: auto;
+  padding-left: 50px;
+}
+
+.signatureExternalEntityText {
+  display: inline-block;
+  float: right;
+  padding-right: 50px;
+}
+
+.signatureInternalEntity {
+  display: inline-block;
+  width: auto;
+  padding-left: 50px;
+}
+
+.signatureExternalEntity {
+  display: inline-block;
+  float: right;
+  padding-right: 50px;
+}
+
+.signatureInternalBrandLabel {
+  display: inline-block;
+  width: auto;
+  padding-left: 50px;
+}
+
+.signatureExternalBrandLabel {
+  display: inline-block;
+  float: right;
+  padding-right: 50px;
+}
+
+.bottominfos {
+  text-align: center;
+  font-size: 15px;
+  display: block;
+}
+
+.topleft-background {
+  position: fixed;
+  left: 0;
+  top: 0;
+}
+
+.bottomright-background {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+
+.footer {
+  position: relative;
+
+}
+
+.footerinfos {
+  width: inherit;
+  //background: yellow;
+  position: absolute;
+  //top: 757px; /* CAREFULL: hardcoded not to stick to bottom of the page ! */
+  top: 717px; /* CAREFULL: hardcoded not to stick to bottom of the page ! */
+}

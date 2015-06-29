@@ -1,0 +1,232 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+  
+  <meta charset="UTF-8">
+  <title>ntFrmwrk Chrome App/Ext</title>
+  <link rel="stylesheet" type="text/css" href="./css/main.css">
+  
+
+</head>
+<body>
+  
+  <!-- [ main container ] -->
+  <div id="container">
+
+  
+
+  <!-- // the Invoice Sections: START // -->
+  <section class="entity"></section>
+  <section class="siret"></section>
+  <section class="address"></section>
+  <section class="city"></section>
+  <section class="references">
+    - Facture n°
+    <span class="invoiceInternalReference"></span>
+    / 
+    <span class="invoiceExternalReference"></span>
+    -
+  </section>
+  <section class="logo">LOGO</section>
+  <section class="presta">
+    <div class="designationText">the designation text</div>
+    <div class="designations">- the designation</div>
+    <div class="clearfix"></div>
+    <div class="pricingText">the pricing text</div>
+    <div class="pricing">- the pricing</div>
+    <div class="clearfix"></div>
+    <div class="payementText">the payement text</div>
+    <div class="payement">- the payement</div>
+  </section>
+  <section class="cgiTva"></section>
+  <section class="signatures">
+    <div class="locationdatespacer">
+      <span class="location"></span>, le
+      <span class="date"></span>
+    </div>
+    <div class="signatureInternalEntityText">the signature internal entity text</div>
+    <div class="signatureExternalEntityText">the signature external entity text</div>
+    <div class="clearfix"></div>
+    <div class="signatureInternalEntity">the signature internal entity</div>
+    <div class="signatureExternalEntity">the signature external entity</div>
+    <div class="clearfix"></div>
+    <div class="signatureInternalBrandLabel">the signature internal brand label</div>
+    <div class="signatureExternalBrandLabel">the signature external brand label</div>
+  </section>
+  <section class="bottominfos">
+    <span class="entity"></span>
+    -
+    <span class="address"></span>
+    -
+    <span class="city"></span>
+    -
+    <span class="sirettext">Immatriculé sous le</span>
+    <span class="siret"></span>
+    -
+    <span class="tel1"></span>
+    /
+    <span class="tel2"></span>
+  </section>
+  <!-- // the Invoice Sections: END // -->
+
+  <!-- the nF_JSON module being ok for loading local & remote JSON data, let's test Weld.js ! -->
+  <!--
+  <ul class="invoice-config">
+    <li class="entity"></li>
+    <li class="siret"></li>
+    <li class="address"></li>
+    <li class="city"></li>
+    <li class="invoiceInternalReference"></li>
+    <li class="invoiceExternalReference"></li>
+    <li>
+      <ul class="cgiTvas">
+        <li class ="cgiTva"></li>
+      </ul>
+    </li>
+    <li class="location"></li>
+    <li>
+      <ul class="dates">
+        <li class ="date"></li>
+      </ul>
+    </li>
+    <li class="signatureInternalEntity"></li>
+    <li class="signatureExternalEntity"></li>
+    <li class="brandInternalLabel"></li>
+    <li class="brandExternalLabel"></li>
+    <li class="tel1"></li>
+    <li class="tel2"></li>
+    <li>
+      <ul class="langs">
+        <li class ="lang"></li>
+      </ul>
+    </li>
+    <li>
+      <ul class="designationTexts">
+        <li class ="designationText"></li>
+      </ul>
+    </li>
+    <li>
+      <ul class="designations">
+        <li class ="designation"></li>
+      </ul>
+    </li>
+    <li>
+      <ul class="pricingTexts">
+        <li class ="pricingText"></li>
+      </ul>
+    </li>
+    <li>
+      <ul class="prices">
+        <li class ="pricing"></li>
+      </ul>
+    </li>
+    <li>
+      <ul class="payementTexts">
+        <li class ="payementText"></li>
+      </ul>
+    </li>
+    <li>
+      <ul class="payements">
+        <li class ="payement"></li>
+      </ul>
+    </li>
+    <li>
+      <ul class="signatureInternalEntityTexts">
+        <li class ="signatureInternalEntityText"></li>
+      </ul>
+    </li>
+    <li>
+      <ul class="signatureExternalEntityTexts">
+        <li class ="signatureExternalEntityText"></li>
+      </ul>
+    </li>
+    <li>
+      <ul class="brandLabelTexts">
+        <li class ="brandLabelText"></li>
+      </ul>
+    </li>
+  </ul>
+  -->
+
+  </div> <!-- <div id="main-container"> -->
+    
+  
+
+  
+
+  <!-- load the Extension/App modules -->
+  
+  <script src="./js/weld.js" type="text/javascript" charset="utf-8"></script> <!-- load Weld.js -->
+  
+  <!-- future main.js code ( contains JSON & Weld.js stuff ( .. ) ) -->
+  <!--
+
+  neatFramework.JSON.loadJSON("json/testdata.json", function(response){
+  jsonResponse = JSON.parse(response); // parse the json fetched from the path passed as argument
+  // debug the entire json
+  console.log(jsonResponse);
+  // debug logs
+  console.log(jsonResponse.entity);
+  console.log(jsonResponse.siret);
+  console.log(jsonResponse.address);
+  console.log(jsonResponse.city);
+  console.log(jsonResponse.invoiceInternalReference);
+  console.log(jsonResponse.invoiceExternalReference);
+  console.log(jsonResponse.cgiTva[0]);
+  console.log(jsonResponse.location);
+  console.log(jsonResponse.dates[0]);
+  console.log(jsonResponse.signatureInternalEntity);
+  console.log(jsonResponse.signatureExternalEntity);
+  console.log(jsonResponse.brandInternalLabel);
+  console.log(jsonResponse.brandExternalLabel);
+  console.log(jsonResponse.tel1);
+  console.log(jsonResponse.tel2);
+  console.log(jsonResponse.langs[0]);
+  console.log(jsonResponse.designationTexts[0]);
+  console.log(jsonResponse.designations[0]);
+  console.log(jsonResponse.pricingTexts[0]);
+  console.log(jsonResponse.pricing[0]);
+  console.log(jsonResponse.payementTexts[0]);
+  console.log(jsonResponse.payement[0]);
+  console.log(jsonResponse.signatureInternalEntityTexts[0]);
+  console.log(jsonResponse.signatureExternalEntityTexts[0]);
+  console.log(jsonResponse.brandLabelTexts[0]);
+
+  // DEBUG : make use of "Weld.js"
+  weld(document.querySelector('.entity'), jsonResponse.entity);
+  weld(document.querySelector('.siret'), jsonResponse.siret);
+  weld(document.querySelector('.address'), jsonResponse.address);
+  weld(document.querySelector('.city'), jsonResponse.city);
+  weld(document.querySelector('.invoiceInternalReference'), jsonResponse.invoiceInternalReference);
+  weld(document.querySelector('.invoiceExternalReference'), jsonResponse.invoiceExternalReference);
+  weld(document.querySelector('.cgiTva'), jsonResponse.cgiTva); // array
+  //weld(document.querySelector('.cgiTva'), jsonResponse.cgiTva[0]); // works fine, but we want an array here ;p
+  weld(document.querySelector('.location'), jsonResponse.location);
+  weld(document.querySelector('.date'), jsonResponse.dates); // array
+  weld(document.querySelector('.signatureInternalEntity'), jsonResponse.signatureInternalEntity);
+  weld(document.querySelector('.signatureExternalEntity'), jsonResponse.signatureExternalEntity);
+  weld(document.querySelector('.brandInternalLabel'), jsonResponse.brandInternalLabel);
+  weld(document.querySelector('.brandExternalLabel'), jsonResponse.brandExternalLabel);
+  weld(document.querySelector('.tel1'), jsonResponse.tel1);
+  weld(document.querySelector('.tel2'), jsonResponse.tel2);
+  weld(document.querySelector('.lang'), jsonResponse.langs); // array
+  weld(document.querySelector('.designationText'), jsonResponse.designationTexts); // array
+  weld(document.querySelector('.designation'), jsonResponse.designations); // array
+  weld(document.querySelector('.pricingText'), jsonResponse.pricingTexts); // array
+  weld(document.querySelector('.pricing'), jsonResponse.pricing); // array
+  weld(document.querySelector('.payementText'), jsonResponse.payementTexts); // array
+  weld(document.querySelector('.payement'), jsonResponse.payement); // array
+  weld(document.querySelector('.signatureInternalEntityText'), jsonResponse.signatureInternalEntityTexts); // array
+  weld(document.querySelector('.signatureExternalEntityText'), jsonResponse.signatureExternalEntityTexts); // array
+  weld(document.querySelector('.brandLabelText'), jsonResponse.brandLabelTexts); // array
+});
+
+  -->
+
+  <script src="./js/neatFramework_JSON_MODULE.js"></script> <!-- load the neatFramework JSON module -->
+  <script src="./js/invoiceGenerator.js"></script> <!-- load the invoice generator locig -->
+  <!-- <script src="./js/app_logic.js"></script> --> <!-- load the app logic ( not a "main.js" as the app is not big enough to need a dedicated module ) -->
+  
+
+</body>
+</html>

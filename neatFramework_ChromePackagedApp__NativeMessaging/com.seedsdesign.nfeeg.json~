@@ -1,0 +1,9 @@
+{
+  "name": "com.seedsdesign.nfeeg",
+  "description": "nF EEG native app",
+  "path": "/home/stephaneag/Documents/Development/dev__Chrome_Packaged_Apps/neatFramework_ChromePackagedApp__NativeMessaging/NativeCode/chrome_nativemessaging.c",
+  "type": "stdio",
+  "allowed_origins": [
+    "chrome-extension://kbmgdicnfpofmognhiagcmhcmnigdnae/"
+  ]
+}
